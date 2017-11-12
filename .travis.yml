@@ -11,6 +11,12 @@ before_install:
   - sudo dockerd --experimental &
   - docker version
 
+env:
+  global:
+    - DOCKER_IMAGE_NAME=travis-cli
+    - DOCKER_ORGANIZATION=beeglercorp
+    - DOCKER_TAG=$DOCKER_ORGANIZATION/$DOCKER_IMAGE_NAME
+
 install: true
 
 stages:
@@ -21,5 +27,9 @@ jobs:
   include:
     - stage: build
       script:
-        - docker build --tag image --compress --force-rm --squash .
-        - ./docker-util/sh/test-image-size.sh -i image -t 35
+        - docker build --tag $DOCKER_TAG --compress --force-rm --squash .
+        - ./docker-util/sh/test-image-size.sh -i $DOCKER_TAG -t 35
+        - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then
+            docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD;
+            docker push DOCKER_TAG;
+          fi
