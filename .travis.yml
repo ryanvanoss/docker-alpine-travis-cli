@@ -53,6 +53,7 @@ jobs:
         - DOCKER_PUBLIC_IMAGE_NAME=$DOCKER_STAGE_IMAGE_NAME
         - TAG=latest
       script:
+        - ./sh/ci/build.sh
         - ./sh/ci/deploy.sh
         - ./sh/ci/test-deploy.sh
 
@@ -61,6 +62,7 @@ jobs:
         - DOCKER_PUBLIC_IMAGE_NAME=$DOCKER_STAGE_IMAGE_NAME
         - TAG=alpine-edge
       script:
+        - ./sh/ci/build.sh
         - ./sh/ci/deploy.sh
         - ./sh/ci/test-deploy.sh
 
@@ -69,5 +71,6 @@ jobs:
         - DOCKER_PUBLIC_IMAGE_NAME=$DOCKER_STAGE_IMAGE_NAME
         - TAG=alpine-3.5
       script:
+        - ./sh/ci/build.sh
         - ./sh/ci/deploy.sh
         - ./sh/ci/test-deploy.sh
