@@ -9,7 +9,12 @@ set -ev
 : ${TAG:=latest}
 IMAGE_WITH_TAG=$DOCKER_PUBLIC_IMAGE_NAME:$TAG
 
+<<<<<<< HEAD:sh/ci/test-deploy.sh
 # pull an existing image from the Docker registry
+=======
+
+
+>>>>>>> 72e9ed2dba2769cc5b420d3151c61ee3ed3a82c1:sh/ci/test-deploy.sh
 docker pull $IMAGE_WITH_TAG
 
 # output the Travis CLI version
